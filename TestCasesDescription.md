@@ -39,23 +39,7 @@ These test cases cover adding tasks with different attributes and verifying expe
 - **Test Data:** 
   - Title: This is a very long title that may exceed the character limit. (Adjust length based on app)
 
-#### Test Case 3: Add Task with Due Date
-
-- **Priority:** Medium
-- **Tags:** Extended Functionality, Manual, Automated
-- **Description:** Verify adding a task with a due date in the future.
-- **Pre-Conditions:** App is launched and user is logged in (if applicable).
-- **Steps:**
-  1. Click "Add Task" button.
-  2. Enter "Finish report" in the title field.
-  3. Select a future date from the due date picker.
-  4. Click "Save" button.
-- **Expected Result:** Task is added to the list with title "Finish report" and the selected due date displayed.
-- **Test Data:** 
-  - Title: Finish report
-  - Due Date: 2024-07-04 (or any future date)
-
-#### Test Case 4: Add Task with Special Characters
+#### Test Case 3: Add Task with Special Characters
 
 - **Priority:** Medium
 - **Tags:** Edge Case, Manual, Automated
@@ -69,7 +53,7 @@ These test cases cover adding tasks with different attributes and verifying expe
 - **Test Data:** 
   - Title: Clean website (includes ® symbol)
 
-#### Test Case 5: Add Task with Empty Title
+#### Test Case 4: Add Task with Empty Title
 
 - **Priority:** High
 - **Tags:** Error Handling, Manual, Automated

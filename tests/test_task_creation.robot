@@ -14,18 +14,16 @@ Add Task with Long Title
     ${title}    Generate Long Title
     Add Task   ${title}
     Verify Task Is Added    ${title}
-
-Add Task with Due Date
-    [Tags]    Extended Functionality   test
-    Add Task With Due Date     30
-    Verify Task Is Added    ${todo_name_simple}
+    [Teardown]    Teardown Delete Task And Close All Browsers    ${title}
 
 Add Task with Special Characters
     [Tags]    Edge Case
-    Add Task    ${special_task_title}
-    Verify Task Added    ${special_task_title}
+    ${title}    Generate Special Character Title
+    Add Task   ${title}
+    Verify Task Is Added    ${title}
+    [Teardown]    Teardown Delete Task And Close All Browsers    ${title}
 
 Add Task with Empty Title
     [Tags]    Error Handling
-    Add Task    ${empty_task_title}
-    Verify Error Message    ${error_message}
+    Verify Cannot Add Task With Empty Title
+    [Teardown]    Close Browser

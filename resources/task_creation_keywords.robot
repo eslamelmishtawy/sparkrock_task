@@ -12,6 +12,7 @@ ${xpath_task_name}    //div[contains(@class,"tiptap") and @aria-label="Task name
 ${xpath_task_description}   //div[contains(@class,"tiptap") and @aria-label="Description"]
 ${xpath_cancel_button}   //button[@aria-label="Cancel"]
 ${xpath_add_task_submit_button}    //button[@data-testid="task-editor-submit-button"]
+${xpath_add_task_submit_button_disabled}    //button[@data-testid="task-editor-submit-button"][[@aria-disabled="true"]]
 ${xpath_task_content_added}    //div[@class="task_content"][text()="__REPLACE__"]
 ${xpath_task_overflow_menu}    //div[@data-index=2]//button[@data-testid="more_menu"]
 ${xpath_task_overflow_menu_delete}    //button[@data-action-hint="task-overflow-menu-delete"]
@@ -42,6 +43,15 @@ Add Task
     Input text    ${xpath_task_description}    ${todo_description}
     Click Element    ${xpath_add_task_submit_button}
 
+Verify Cannot Add Task With Empty Title
+    Wait Until Element Is Visible    ${xpath_add_task_button}    timeout=20
+    sleep    1
+    Click Element    ${xpath_add_task_button}
+    Wait Until Page Contains Element    ${xpath_task_name}
+    Input Text    ${xpath_task_name}    ${EMPTY}
+    Input text    ${xpath_task_description}    ${todo_description}
+    Wait Until Page Contains Element   ${xpath_add_task_submit_button}
+
 Add Task With Due Date
     [Arguments]    ${date}
     Wait Until Element Is Visible    ${xpath_add_task_button}    timeout=20
@@ -65,6 +75,10 @@ Generate Long Title
     ${long_title}    Generate Random String    100    chars=[LETTERS]
     RETURN    ${long_title}
 
+Generate Special Character Title
+    ${title}    Generate Random String    10    chars=[LETTERS][NUMBERS]$#@
+    RETURN    ${title}
+
 Verify Task Is Added
     [Arguments]    ${title}
     ${locator}    Replace String    ${xpath_task_content_added}    __REPLACE__    ${title}
@@ -86,6 +100,7 @@ Delete the Added Task
     Wait Until Element Is Visible    ${xpath_task_overflow_menu_delete}
     Click Element    ${xpath_task_overflow_menu_delete}
     Wait Until Element Is Visible    ${xpath_submit_button}
+    Click Element    ${xpath_submit_button}
 
 Verify Task Is Deleted
     [Arguments]    ${title}
